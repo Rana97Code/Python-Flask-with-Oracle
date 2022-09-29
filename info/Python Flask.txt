@@ -1,0 +1,90 @@
+					Installation
+
+
+Installation Required Python and Packages :
+Python : Install Python from https://www.python.org/
+Check Python : py --version
+Check Python Package : pip --version
+
+
+				Create a project folder
+
+
+**Let's setup Virtual Environment :
+>> py -3 -m venv venv
+(Where env is the directory where you want to install venv or Virtual
+environment.)
+Lets Activate the environment :
+>> venv\Scripts\activate
+If you are not getting any errors , you look like (env) {YOUR PROJECT DIRECTORY}
+Install FLASK :
+>> pip install flask
+
+
+**Create a file in this project name app.py
+
+**and there code example::
+
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/product')
+def product():
+    return'<h1> Product is there </h1>'
+
+
+if __name__ == "__main__":
+        app.run(debug=True)
+
+
+
+**then Run the project using flowing command
+>>flask run OR  >>flask --app app run
+
+
+					Mastaring Templete
+
+
+In static folder have to store all asset file in there.
+
+In template folder have to store all view file.
+
+
+					Database Connection
+
+For Oracle database we have to install a package name cx_Oracle
+and command for this package is >>pip install cx_Oracle
+command for check >>pip freeze
+
+After install the cx_Oracle then connect the database with python flask.
+
+inside your py file have to setup the code=>
+
+import cx_Oracle
+
+
+con = cx_Oracle.connect('system/Bmit123#@localhost:1521/BMITVAT')
+cur = con.cursor()
+
+sqlIn= 'INSERT INTO "SYSTEM".STUDENTS (STUDENT_NAME, STUDENT_TYPE, STATUS, USER_ID) VALUES (:1, :2, :3, :4)'
+cur.execute(sqlIn,("RANA BISWAS ARNAB", "REGULAR", "1", "2"))
+con.commit()
+
+cur.close()
+con.close()
+
+
+
+IN con the BMITVAT is the OracleServiceBMITVAT (This service name get from using (windows+r) then type services.msc)
+						
+
+
+
+
+

@@ -1,0 +1,161 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Add Customers</h5>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <form  method="POST" action="" id="customerForm">  
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="customer_name">Name</label>
+                                                            <input class="form-control" name="customer_name" id="customer_name" value=""
+                                                                aria-describedby="userHelp" placeholder="Enter email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="email">Email address</label>
+                                                            <input type="email" value="" name="email" class="form-control" id="email" 
+                                                            aria-describedby="emailHelp" placeholder="Enter email">
+                                                                
+                                                            <small id="emailHelp" class="form-text">
+                                                                You don't have an email address associated with this account.
+                                                            </small>
+                                                        </div>
+                                                    </div>                                                
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="phone">phone</label>
+                                                            <input type="email" class="form-control" name="phone" id="phone" aria-describedby="emailHelp" placeholder="Your name">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6 mb-4">
+                                                        <label for="customer_type">Customer Type</label>
+
+                                                        <div class="form-group">
+                                                        <input type="radio" name="customer_type" checked="checked" class="customer_type" id="local_customer" value="1" /> 
+                                                        <label for="local_customer">Local</label>
+                                                        <input type="radio" name="customer_type" id="foreign_customer" class="customer_type" value="2" />
+                                                        <label for="foreign_customer"> Foreign</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="customer_name">Country</label>
+                                                            <select class="form-control select2" id="countery_id"  name="countery_id" tabindex="5">
+                                                                <option value="">
+                                                                Select Country
+                                                                </option>
+                                                                
+                                                                <option value=""></option>
+                                                            
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label for="customer_name">Customer Address</label>
+                                                            <textarea name="c_address" id="c_address" class="form-control form-control-info" cols="30" rows="2"></textarea>
+                                                            <span class="messages text-danger">
+                                                        
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label> BIN/NID :</label>
+                                                            <input type="text" name="c_bin_nid" id="c_bin_nid" class="form-control c_bin_nid" value="" placeholder="BIN or NID">
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label>TIN :</label>
+                                                            <input type="text" name="c_tin" id="c_tin" class="form-control" value="" placeholder="TIN Number">
+                                                            <span style="font-size:14px;">If Customer type is local then BIN/NID or TIN must be submitted.</span><br>
+                                                            <span style="font-size:14px;">If Customer type is Foreign then no need BIN/NID or TIN.</span>
+                                                            
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label>Shipping Country :</label>
+                                                            <select class="form-control select2" id="shipping_countery_id"  name="shipping_countery_id" tabindex="5">
+                                                                <option value="">
+                                                                    Select Country
+                                                                </option>
+                                                                
+                                                                <option value=""></option>
+                                                            
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-6 mb-4">
+                                                        <div class="form-group">
+                                                            <label>Shipping Address :</label>
+                                                                <textarea name="shipping_address" id="shipping_address" class="form-control form-control-info" cols="30" rows="2"></textarea>
+                                                                <span class="messages text-danger">
+                                                                </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                        </div>
+                                                    </div>  
+                                                </form>
+                                              
+                                            </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                          <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!-- [ Main Content ] end -->
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

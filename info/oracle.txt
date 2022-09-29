@@ -1,0 +1,55 @@
+PASS: Bmit123#
+db name- BMITVAT
+SID - BMITVAT
+PDB - BMITVATPDB1
+
+LISTENER NAME - BMITVATLST
+
+LISTENER PORT -1521
+EM PORT 5500
+
+express URL https://DESKTOP-9FOP23M:5500/em
+	or	https://DESKTOP-9FOP23M:5500/em
+
+C:\Program Files\Java\jdk-17.0.4.1\
+
+https://www.sqlines.com/online
+
+
+INSERT INTO USERS (sale_center_id, user_type, user_name, first_name, last_name, email, user_nid, nid_scan, pro_img, user_phone, role_id, password, status, terminate_date, terminate_reason, user_id) VALUES
+(1, NULL, 'superadmin2', 'arif', 'islam', 'arifulislamfiverr008@gmail.com', '01856478965', '1425298636625f7543e79c0.jpg', '970321816625f7543e7aa7.png', '0176428212', 1, 'd4e22790856eef5e3c3bd43c63a6ab9e', 0, '28-AUG-22 03.17.03.316431900 PM', NULL, 1);
+INSERT INTO BOM_VERSION (BOM_ID, REMARKS, SALES_PRICE) VALUES
+(1, 'adad', 1105.00);
+
+
+CREATE TABLE BOM_VERSION (
+  ID number(10) NOT NULL,
+  BOM_ID number(10) NOT NULL,
+  REMARKS varchar2(255) NOT NULL,
+  SALES_PRICE binary_double NOT NULL
+);
+
+
+
+ALTER TABLE BOM_VERSION ADD (
+  CONSTRAINT bom_pk PRIMARY KEY (ID));
+
+CREATE SEQUENCE bom_seq START WITH 1;
+
+
+CREATE OR REPLACE TRIGGER bom_bir 
+BEFORE INSERT ON BOM_VERSION 
+FOR EACH ROW
+
+BEGIN
+  SELECT bom_seq.NEXTVAL
+  INTO   :new.id
+  FROM   dual;
+END;
+/
+
+
+INSERT ALL 
+INTO COUNTRIES (ID, SORTNAME, COUNTRY_NAME, PHONECODE) VALUES (3, 'DZ', 'Algeria', 213)
+INTO COUNTRIES (ID, SORTNAME, COUNTRY_NAME, PHONECODE) VALUES (4, 'AS', 'American Samoa', 1684)
+SELECT 3 FROM dual;
