@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import cx_Oracle
 
 
@@ -6,17 +6,19 @@ app = Flask(__name__)
 app.secret_key = "Secret Key"
 
 
+def getConnection() :
+    connection = cx_Oracle.connect('system/Bmit123#@localhost:1521/BMITVAT')
+    return connection
+# cur = con.cursor()
+ 
 
-con = cx_Oracle.connect('system/Bmit123#@localhost:1521/BMITVAT')
-cur = con.cursor()
 
+# sqlIn= 'INSERT INTO "SYSTEM".STUDENTS (STUDENT_NAME, STUDENT_TYPE, STATUS, USER_ID) VALUES (:1, :2, :3, :4)'
+# cur.execute(sqlIn,("PEULI BISWAS ARNAB", "REGULAR", "1", "2"))
+# con.commit()
 
-sqlIn= 'INSERT INTO "SYSTEM".STUDENTS (STUDENT_NAME, STUDENT_TYPE, STATUS, USER_ID) VALUES (:1, :2, :3, :4)'
-cur.execute(sqlIn,("PEULI BISWAS ARNAB", "REGULAR", "1", "2"))
-con.commit()
-
-cur.close()
-con.close()
+# cur.close()
+# con.close()
 
 
 @app.route('/')
@@ -29,20 +31,72 @@ def dashboard():
     return render_template('dashboard/index.html')
     
 
-# @app.route('/product')
-# def product():
-#     return'<h1> Product is there </h1>'
-
               #Customer Section
 
 @app.route('/customers')
 def customers():
-    return render_template('customers/index.html')
+    connection = getConnection()
+    cursor = connection.cursor()
+
+    sql_fetch_date = "select * from CUSTOMERS"
+    cursor.execute(sql_fetch_date)
+    result = cursor.fetchall()
+    return render_template('customers/index.html', result=result)
 
 
 @app.route('/add_customer')
 def add_customer():
-    return render_template('customers/add.html')
+    connection = getConnection()
+    cursor = connection.cursor()
+
+    sql_fetch_date = "select * from COUNTRIES"
+    cursor.execute(sql_fetch_date)
+    result = cursor.fetchall()
+    return render_template('customers/add.html', result=result)
+
+
+
+@app.route('/customer_insert', methods = ['POST'])
+def customer_insert():
+
+
+   if request.method == "POST":
+            customer_name = request.form['customer_name']
+            email = request.form['email']
+            phone = request.form['phone']
+            customer_type = request.form['customer_type']
+            country_id = request.form['countery_id']
+            c_address = request.form['c_address']
+            c_bin_nid = request.form['c_bin_nid']
+            c_tin = request.form['c_tin']
+            shipping_country_id = request.form['shipping_country_id']
+            shipping_address = request.form['shipping_address']
+
+            connection = getConnection()
+            cursor = connection.cursor()
+            cursor.execute("insert into CUSTOMERS (customer_name, email, phone, customer_type, country_id, c_address, c_bin_nid, c_tin, shipping_country_id, shipping_address) VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9, :10)",
+            (customer_name, email, phone, customer_type, country_id, c_address, c_bin_nid, c_tin, shipping_country_id, shipping_address)) 
+            connection.commit() 
+            # return "successfully Inserted" 
+            return redirect(url_for('customers'))
+            cursor.close()
+            connection.close()
+
+
+
+@app.route('/edit_customer')
+def edit_customer():
+    connection = getConnection()
+    cursor = connection.cursor()
+
+    sql_fetch_date = "select * from CUSTOMERS"
+    cursor.execute(sql_fetch_date)
+    result = cursor.fetchall()
+    return render_template('customers/edit.html', result=result)
+
+
+
+
 
 
 
