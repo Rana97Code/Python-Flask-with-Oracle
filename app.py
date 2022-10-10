@@ -84,20 +84,56 @@ def customer_insert():
 
 
 
-@app.route('/edit_customer')
-def edit_customer():
+@app.route("/edit_customer/<int:id>")
+def edit_customer(id):
     connection = getConnection()
     cursor = connection.cursor()
 
-    sql_fetch_date = "select * from CUSTOMERS"
+    sql_fetch_date = "SELECT * FROM CUSTOMERS WHERE ID = '{}'".format(id)
     cursor.execute(sql_fetch_date)
-    result = cursor.fetchall()
+    result = cursor.fetchone()
     return render_template('customers/edit.html', result=result)
 
 
 
 
+@app.route('/customer_update/<int:id>', methods = ['POST'])
+def customer_update(id):
 
+
+   if request.method == "POST":
+            customer_name = request.form['customer_name']
+            email = request.form['email']
+            phone = request.form['phone']
+            customer_type = request.form['customer_type']
+            country_id = request.form['countery_id']
+            c_address = request.form['c_address']
+            c_bin_nid = request.form['c_bin_nid']
+            c_tin = request.form['c_tin']
+            shipping_country_id = request.form['shipping_country_id']
+            shipping_address = request.form['shipping_address']
+
+            connection = getConnection()
+            cursor = connection.cursor()
+            cursor.execute("update CUSTOMERS set customer_name='{}', email='{}', phone='{}', customer_type='{}', country_id='{}', c_address='{}', c_bin_nid='{}', c_tin='{}', shipping_country_id='{}', shipping_address='{}' WHERE id = '{}'".format(customer_name, email, phone, customer_type, country_id, c_address, c_bin_nid, c_tin, shipping_country_id, shipping_address, id)) 
+            connection.commit() 
+            # return "successfully Inserted" 
+            return redirect(url_for('customers'))
+            cursor.close()
+            connection.close()
+
+
+
+
+@app.route("/delete_customer/<int:id>")
+def delete_customer(id):
+    connection = getConnection()
+    cursor = connection.cursor()
+
+    sql_fetch_date = "DELETE FROM CUSTOMERS WHERE ID = '{}'".format(id)
+    cursor.execute(sql_fetch_date)
+    connection.commit() 
+    return redirect(url_for('customers'))
 
 
 if __name__ == "__main__":

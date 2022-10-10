@@ -24,17 +24,17 @@
                                         </div>
                                         <div class="card-block">
                                             <div class="row">
-                                                <form  method="POST" action="{{ url_for('customer_insert') }}" id="customerForm"> 
+                                                <form  method="POST" action="{{ url_for('customer_update', id= result[0]) }}" id="customerForm"> 
                                                     <div class="form-group row"> 
                                                         <div class="col-sm-6 ">
                                                             <label for="customer_name">Name</label>
-                                                            <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Enter Name">
+                                                            <input type="text" class="form-control" name="customer_name" id="customer_name" value="{{ result[1] }}">
                                                         </div>
                                                     
                                                         <div class="col-sm-6 ">
                                                             <label for="email">Email address</label>
                                                             <input type="email" name="email" class="form-control" id="email" 
-                                                            aria-describedby="emailHelp" placeholder="Enter email">
+                                                            aria-describedby="emailHelp" value="{{ result[2] }}">
                                                             <small id="emailHelp" class="form-text">
                                                                 You don't have an email address associated with this account.
                                                             </small>
@@ -44,7 +44,7 @@
                                                     <div class="form-group row">
                                                         <div class="col-sm-6">
                                                                 <label for="phone">phone</label>
-                                                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone Number">
+                                                                <input type="text" class="form-control" name="phone" id="phone" value="{{ result[3] }}">
                                                         </div>
 
                                                         <div class="col-sm-6">
@@ -62,7 +62,7 @@
                                                         <div class="col-sm-6 mb-4">
                                                                 <label for="customer_name">Country</label>
                                                                 <select class="form-control select2" id="countery_id"  name="countery_id" tabindex="5">
-                                                                    <option value="">
+                                                                    <option value="{{ result[4] }}">
                                                                     Select Country
                                                                     </option>
                                                                     {% for row in result %}  
@@ -75,7 +75,7 @@
 
                                                         <div class="col-sm-6 mb-4">
                                                                 <label for="customer_name">Customer Address</label>
-                                                                <textarea name="c_address" id="c_address" class="form-control form-control-info" cols="30" rows="2"></textarea>
+                                                                <textarea name="c_address" id="c_address" class="form-control form-control-info" value="{{ result[6] }}" cols="30" rows="2"></textarea>
                                                                 <span class="messages text-danger">
                                                                 </span>
                                                         </div>
@@ -84,13 +84,13 @@
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-4">
                                                                 <label> BIN/NID :</label>
-                                                                <input type="text" name="c_bin_nid" id="c_bin_nid" class="form-control c_bin_nid" value="" placeholder="BIN or NID">
+                                                                <input type="text" name="c_bin_nid" id="c_bin_nid" class="form-control c_bin_nid" value="{{ result[9] }}" placeholder="BIN or NID">
                                                         </div>
 
                                                         
                                                         <div class="col-sm-6 mb-4">
                                                                 <label>TIN :</label>
-                                                                <input type="text" name="c_tin" id="c_tin" class="form-control" value="" placeholder="TIN Number">
+                                                                <input type="text" name="c_tin" id="c_tin" class="form-control" value="{{ result[10] }}" placeholder="TIN Number">
                                                                 <span style="font-size:14px;">If Customer type is local then BIN/NID or TIN must be submitted.</span><br>
                                                                 <span style="font-size:14px;">If Customer type is Foreign then no need BIN/NID or TIN.</span>
                                                         </div>
@@ -100,7 +100,7 @@
                                                         <div class="col-sm-6 mb-4">
                                                                 <label>Shipping Country :</label>
                                                                 <select class="form-control select2" id="shipping_country_id"  name="shipping_country_id" tabindex="5">
-                                                                    <option value="">
+                                                                    <option value="{{ result[11] }}">
                                                                         Select Country
                                                                     </option>
                                                                     {% for row in result %}  
@@ -115,7 +115,7 @@
 
                                                         <div class="col-sm-6 mb-4">
                                                                 <label>Shipping Address :</label>
-                                                                    <textarea name="shipping_address" id="shipping_address" class="form-control form-control-info" cols="30" rows="2"></textarea>
+                                                                    <textarea name="shipping_address" id="shipping_address" class="form-control form-control-info" value="{{ result[7] }}" cols="30" rows="2"></textarea>
                                                                     <span class="messages text-danger">
                                                                     </span>
                                                         </div>
